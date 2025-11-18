@@ -3,7 +3,7 @@ const loginContainer = document.getElementById('login-container');
 const loginForm = document.getElementById('login-form');
 const mainAppContent = document.getElementById('main-app-content');
 
-// Hardcoded Credentials (Giset na sa 'admin' ug 'admin123')
+// Hardcoded Credentials
 const VALID_USERNAME = 'admin';
 const VALID_PASSWORD = 'admin123';
 
@@ -17,9 +17,10 @@ let isLoggedIn = false;
 function navigateToHome() {
     isLoggedIn = true; 
     
-    // UI Transition: Hide login, Show main app content
-    loginContainer.classList.add('hidden');
-    mainAppContent.classList.remove('hidden');
+    // UI Transition: Hide login by setting display to 'none'
+    loginContainer.style.display = 'none';
+    // Show main app content by setting display to 'block' (or appropriate default)
+    mainAppContent.style.display = 'block'; 
     
     // Data Initialization: Load and display the volunteer opportunities.
     renderOpportunities(); 
@@ -56,12 +57,13 @@ function handleLogin(e) {
 function logout() {
     isLoggedIn = false;
     alert("You have been logged out.");
+    
     // Hide the main content
-    mainAppContent.classList.add('hidden');
+    mainAppContent.style.display = 'none';
+    
     // Show the login screen
-    loginContainer.classList.remove('hidden');
+    loginContainer.style.display = 'block';
 }
-
 
 // --- VOLUNTEER APPLICATION LOGIC ---
 
@@ -144,3 +146,6 @@ form.addEventListener('submit', handleFormSubmit);
 
 // 2. Attach the login form handler
 loginForm.addEventListener('submit', handleLogin);
+
+// 3. Initially hide the main app content on page load
+mainAppContent.style.display = 'none';

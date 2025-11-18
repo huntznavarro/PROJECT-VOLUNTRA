@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Volunteer Hub - Login</title>
+    <style>
+        /* CSS to hide elements (keeping it simple for this example) */
+        .hidden {
+            display: none !important;
+        }
+        /* Basic styling for the container */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #login-container { border: 1px solid #ccc; padding: 20px; max-width: 400px; margin: 50px auto; }
+        #login-container input { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        #login-container button { padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍎 School Volunteer Hub</h1>
+        <p>Find and manage school volunteer opportunities.</p>
+    </header>
+
+    <section id="login-container">
+        <h2>🔒 User Login</h2>
+        <form id="login-form">
+            <div>
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" required>
+            </div>
+            <div>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button type="submit">Log In</button>
+            <p style="margin-top: 15px;">*Use **admin** / **admin123** to log in.</p> 
+            <p id="login-message" style="color: red; margin-top: 10px;" class="hidden"></p>
+        </form>
+    </section>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const usernameInput = document.getElementById('login-username').value;
+            const passwordInput = document.getElementById('login-password').value;
+            const loginMessage = document.getElementById('login-message');
+
+            const correctUsername = 'admin';
+            const correctPassword = 'admin123';
+
+            // Check credentials
+            if (usernameInput === correctUsername && passwordInput === correctPassword) {
+                // Successful login: Redirect to the homepage
+                window.location.href = 'homepage.html';
+            } else {
+                // Failed login: Display an error message (I'll use an alert as you requested, but also a message on the page)
+                alert('Login Failed: Decline. Please check your username and password.');
+                loginMessage.textContent = 'Login Failed: Decline.';
+                loginMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

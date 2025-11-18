@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Volunteer Hub - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        main, footer { max-width: 800px; margin: 0 auto; }
+        #add-opportunity, #opportunity-list-section { 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border-radius: 5px;
+        }
+        #opportunity-form input, #opportunity-form textarea { 
+            width: 100%; 
+            padding: 8px; 
+            margin-bottom: 10px; 
+            box-sizing: border-box; 
+        }
+        #opportunity-form label { display: block; margin-bottom: 5px; font-weight: bold; }
+        #opportunity-form button { padding: 10px 15px; cursor: pointer; }
+        #opportunity-list { list-style: none; padding: 0; }
+        #opportunity-list li { border-bottom: 1px dashed #eee; padding: 10px 0; }
+        /* Style for the Logout button */
+        #logout-btn { 
+            background-color: #f44336; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            cursor: pointer; 
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✅ Volunteer Dashboard</h1>
+        <button id="logout-btn" onclick="logout()" style="float: right;">Log Out</button>
+        <p>Manage and view all current volunteer opportunities.</p>
+    </header>
+
+    <main>
+        <section id="add-opportunity">
+            <h2>➕ Add New Opportunity</h2>
+            <form id="opportunity-form">
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div>
+                    <label for="contact">Contact Email:</label>
+                    <input type="email" id="contact" required>
+                </div>
+                <button type="submit">Post Opportunity</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <section id="opportunity-list-section">
+            <h2>📚 Current Opportunities</h2>
+            <ul id="opportunity-list">
+                <li>**Book Fair Setup** - 2025-12-05 - Help organize books. Contact: test@school.edu</li>
+                <li>**Field Trip Chaperone** - 2025-11-28 - Needed for 3rd-grade trip. Contact: trip@school.edu</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 School Volunteer App</p>
+    </footer>
+    
+    <script>
+        // Simple function to log out and redirect to the login page
+        function logout() {
+            // In a real app, you would clear session/local storage here
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+        
+        // You can add more JavaScript functionality for the forms here later
+        document.getElementById('opportunity-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Opportunity posted successfully! (Requires further backend implementation)');
+            this.reset(); // Clear the form
+        });
+    </script>
+</body>
+</html>
