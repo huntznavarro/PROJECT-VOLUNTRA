@@ -305,3 +305,44 @@ window.addEventListener('click', function(event) {
         }
     }
 });
+
+const form = document.getElementById("help-form");
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Basic validation
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const category = document.getElementById("category").value;
+    const urgency = document.getElementById("urgency").value;
+    const description = document.getElementById("description").value.trim();
+    const imageFiles = Array.from(document.getElementById("image").files);
+
+    if (!name || !location || !category || !urgency || !description) {
+        showMessage("Please fill in all required fields.", "error");
+        return;
+    }
+
+    // Handle images
+    const processImages = imageFiles.map(file => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error(`Failed to read file: ${file.name}`));
+            reader.readAsDataURL(file);
+        });
+    });
+
+    Promise.allSettled(processImages).then(results => {
+        const successfulImages = results.filter(result => result.status === 'fulfilled').map(result => result.value);
+        const failedCount = results.filter(result => result.status === 'rejected').length;
+
+        if (failedCount > 0) {
+            console.error('Some images failed to process:', results.filter(result => result.status === 'rejected').map(result => result.reason));
+            showMessage(`${failedCount} image(s) failed to process and were skipped.`, "error");
+        }
+
+        createPost(name, phone, location, category, urgency, description, successfulImages);
+    });
