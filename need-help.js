@@ -497,3 +497,7 @@ function openActionsModal(index) {
         }, 100);
     }
 }
+const footerText = document.querySelector("footer p");
+if (footerText) {
+    footerText.innerHTML = `© ${new Date().getFullYear()} Voluntra — Making the world better together `;
+}
