@@ -40,3 +40,23 @@ if (giveHelpBtn) {
         showToast("Redirecting to the Volunteer Page...");
     });
 }
+
+
+// highlisht active nav link
+window.addEventListener("scroll", () => {
+    let scrollPos = window.scrollY;
+
+    document.querySelectorAll("section").forEach(section => {
+        if (
+            scrollPos >= section.offsetTop - 100 &&
+            scrollPos < section.offsetTop + section.offsetHeight
+        ) {
+            document.querySelectorAll("nav a").forEach(a => {
+                a.classList.remove("active-link");
+                if (a.getAttribute("href").replace("#", "") === section.id) {
+                    a.classList.add("active-link");
+                }
+            });
+        }
+    });
+});
