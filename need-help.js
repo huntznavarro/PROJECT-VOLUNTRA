@@ -294,3 +294,14 @@ function initMap() {
     });
 }
 
+// Close modals when clicking outside
+window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        editingIndex = -1;
+        if (map) {
+            map.remove();
+            map = null;
+        }
+    }
+});
