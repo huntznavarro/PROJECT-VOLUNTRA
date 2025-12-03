@@ -117,6 +117,17 @@ document.addEventListener('click', function(e) {
     }
 });
 
+let editingIndex = -1;
+let map, marker;
+let selectedLatLng = null;
 
+function deletePost(index) {
+    if (confirm('Are you sure you want to delete this post?')) {
+        const posts = JSON.parse(localStorage.getItem("voluntraPosts")) || [];
+        posts.splice(index, 1);
+        savePosts(posts);
+        displayPosts(posts);
+    }
+}
 
 
