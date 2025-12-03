@@ -345,4 +345,6 @@ form.addEventListener("submit", function (event) {
         }
 
         createPost(name, phone, location, category, urgency, description, successfulImages);
+        
     });
+ });
