@@ -417,7 +417,7 @@ form.addEventListener("submit", function (event) {
 
     // Scroll to posts
     document.getElementById("posts-section").scrollIntoView({ behavior: "smooth" });
-    
+
     function showMessage(message, type) {
     // Remove any existing message
     const existingMsg = document.querySelector(".message");
@@ -454,4 +454,46 @@ form.addEventListener("submit", function (event) {
     setTimeout(() => {
         msgDiv.remove();
     }, 5000);
+}
+
+function openActionsModal(index) {
+    const posts = JSON.parse(localStorage.getItem("voluntraPosts")) || [];
+    const post = posts[index];
+
+    let mapHtml = '';
+    if (post.lat && post.lng) {
+        mapHtml = `<div id="actions-map" style="height: 200px; margin: 10px 0;"></div>`;
+    }
+
+    const content = `
+        <h3>Actions on ${post.name}'s Request</h3>
+        <p><strong>Description:</strong> ${post.description}</p>
+        <p><strong>Location:</strong> ${post.location}</p>
+        ${mapHtml}
+        <h4>Comments (${(post.comments || []).length})</h4>
+        <div class="comments-list">
+            ${(post.comments || []).map(comment => `<div class="comment">${comment}</div>`).join('')}
+        </div>
+        <h4>Donations (${(post.donations || []).length})</h4>
+        <div class="donations-list">
+            ${(post.donations || []).map(donation => `<div class="donation">${donation}</div>`).join('')}
+        </div>
+        <h4>Volunteers (${(post.volunteers || []).length})</h4>
+        <div class="volunteers-list">
+            ${(post.volunteers || []).map(volunteer => `<div class="volunteer">${volunteer}</div>`).join('')}
+        </div>
+    `;
+
+    document.getElementById('actions-content').innerHTML = content;
+
+    const modal = document.getElementById('actions-modal');
+    modal.style.display = 'block';
+
+    if (post.lat && post.lng) {
+        setTimeout(() => {
+            const actionsMap = L.map('actions-map').setView([post.lat, post.lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(actionsMap);
+            L.marker([post.lat, post.lng]).addTo(actionsMap);
+        }, 100);
+    }
 }
