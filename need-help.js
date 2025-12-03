@@ -63,5 +63,13 @@ function displayPosts(posts) {
                 imageHtml += '</div>';
             }
 }
+     const commentsCount = (post.comments || []).length;
+        const donationsCount = (post.donations || []).length;
+        const volunteersCount = (post.volunteers || []).length;
+
+
+
+
+
 });
 }
