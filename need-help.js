@@ -129,5 +129,21 @@ function deletePost(index) {
         displayPosts(posts);
     }
 }
+    function editPost(index) {
+    const posts = JSON.parse(localStorage.getItem("voluntraPosts")) || [];
+    const post = posts[index];
 
+    // Populate modal form
+    document.getElementById('edit-name').value = post.name;
+    document.getElementById('edit-phone').value = post.phone || '';
+    document.getElementById('edit-location').value = post.location;
+    document.getElementById('edit-category').value = post.category;
+    document.getElementById('edit-urgency').value = post.urgency;
+    document.getElementById('edit-description').value = post.description;
+
+    editingIndex = index;
+
+    // Show modal
+    document.getElementById('edit-modal').style.display = 'block';
+}
 
