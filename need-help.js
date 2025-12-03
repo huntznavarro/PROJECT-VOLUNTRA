@@ -164,7 +164,8 @@ window.addEventListener('click', function(event) {
     }
 });
 
-    // Edit form submit
+    
+// Edit form submit
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -195,14 +196,14 @@ document.getElementById('edit-form').addEventListener('submit', function(event) 
     savePosts(posts);
     displayPosts(posts);
 
-    // Close modal
+    //Close modal
     document.getElementById('edit-modal').style.display = 'none';
     editingIndex = -1;
 
     showMessage('Post updated successfully!', 'success');
 });
 
-// Show image gallery modal
+//Show image gallery modal
 function showImageGallery(images) {
     const gallery = document.getElementById('image-gallery');
     gallery.innerHTML = '';
@@ -217,11 +218,10 @@ function showImageGallery(images) {
     document.getElementById('image-modal').style.display = 'block';
 }
 
-// Close image modal
+//Close image modal
 document.querySelectorAll('.close').forEach(closeBtn => {
     closeBtn.addEventListener('click', function() {
         this.closest('.modal').style.display = 'none';
     });
 });
-
 
